@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" :class="currentTheme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title x-text="(companySettings?.name || 'HR Pro Enterprise') + ' - ERP'"></title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            800: '#0c4a6e',
+                            900: '#0a3651',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Tajawal', 'Segoe UI', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Supabase JS Client v2 -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <style>
+        [x-cloak] { display: none !important; }
+        body { font-family: 'Tajawal', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.4); }
+        ::-webkit-scrollbar-thumb { background: rgba(51, 65, 85, 0.8); border-radius: 4px; }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased transition-colors duration-300"
+      :class="isDarkTheme ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'"
+      x-data="hrApp()" x-init="initApp()">
+
+    <!-- 1. SECURE LOGIN SCREEN -->
+    <template x-if="!currentUser">
+        <div class="min-h-screen flex items-center justify-center p-4 bg-slate-950">
+            <div class="w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-8 space-y-6 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 left-0 h-2 bg-gradient-to-r from-brand-500 via-cyan-400 to-emerald-500"></div>
+
+                <div class="text-center space-y-2">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-600 to-cyan-400 flex items-center justify-center text-white mx-auto shadow-xl shadow-brand-500/20 font-black text-2xl">
+                        ERP
+                    </div>
+                    <h1 class="text-xl font-bold text-slate-100" x-text="companySettings.name"></h1>
+                    <p class="text-xs text-cyan-400 font-medium flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-cloud-lock text-[10px]"></i> نظام سحابي متكامل للموارد البشرية
+                    </p>
+                </div>
+
+                <form @submit.prevent="handleLogin" class="space-y-4">
+                    <template x-if="loginError">
+                        <div class="p-3 bg-rose-950/60 border border-rose-800 text-rose-300 rounded-xl text-xs flex items-center gap-2">
+                            <i class="fa-solid fa-circle-exclamation shrink-0"></i>
+                            <span x-text="loginError"></span>
+                        </div>
+                    </template>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1.5">اسم المستخدم (Username)</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-user absolute right-3 top-3 text-slate-500 text-xs"></i>
+                            <input type="text" required x-model="loginForm.username" placeholder="admin"
+                                   class="w-full bg-slate-950 border border-slate-800 rounded-xl pr-10 pl-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-brand-500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1.5">كلمة المرور (Password)</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-key absolute right-3 top-3 text-slate-500 text-xs"></i>
+                            <input type="password" required x-model="loginForm.password" placeholder="••••••••"
+                                   class="w-full bg-slate-950 border border-slate-800 rounded-xl pr-10 pl-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-brand-500">
+                        </div>
+                    </div>
+
+                    <button type="submit" :disabled="loading" class="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-shield-halved" x-show="!loading"></i>
+                        <i class="fa-solid fa-spinner animate-spin" x-show="loading"></i>
+                        <span x-text="loading ? 'جاري التحقق...' : 'تسجيل الدخول للنظام'"></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <!-- 2. MAIN APP SHELL -->
+    <template x-if="currentUser">
+        <div class="flex h-screen overflow-hidden">
+
+            <!-- Sidebar Navigation -->
+            <aside class="w-64 border-l flex flex-col justify-between z-20 no-print flex-shrink-0 transition-colors duration-300"
+                   :class="isDarkTheme ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-200'">
+                <div>
+                    <!-- Logo & Brand -->
+                    <div class="h-16 flex items-center justify-between px-4 border-b transition-colors"
+                         :class="isDarkTheme ? 'border-slate-800 bg-slate-900/50' : 'border-slate-100 bg-slate-50'">
+                        <div class="flex items-center space-x-3 space-x-reverse">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-400 flex items-center justify-center text-white shadow-lg font-bold text-xl">
+                                ERP
+                            </div>
+                            <div>
+                                <h1 class="font-bold text-sm leading-tight truncate w-36" :class="isDarkTheme ? 'text-white' : 'text-slate-800'" x-text="companySettings.name"></h1>
+                                <p class="text-[10px] text-brand-500 font-medium" x-text="currentUser.role + ' - صلاحيات مخصصة'"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Links -->
+                    <nav class="p-3 space-y-1 overflow-y-auto max-h-[calc(100vh-140px)]">
+                        <template x-for="item in accessibleNavItems" :key="item.id">
+                            <button @click="currentTab = item.id"
+                                    :class="currentTab === item.id ? 'bg-brand-600 text-white shadow-md shadow-brand-600/30' : (isDarkTheme ? 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900')"
+                                    class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all duration-150 group">
+                                <div class="flex items-center space-x-3 space-x-reverse">
+                                    <i :class="item.icon" class="text-sm w-5 text-center"></i>
+                                    <span x-text="item.label"></span>
+                                </div>
+                                <template x-if="item.id === 'documents' && expiringDocsCount > 0">
+                                    <span class="px-2 py-0.5 bg-rose-500 text-white text-[10px] rounded-full font-bold" x-text="expiringDocsCount"></span>
+                                </template>
+                            </button>
+                        </template>
+                    </nav>
+                </div>
+
+                <!-- User Footer & Logout -->
+                <div class="p-3 border-t transition-colors" :class="isDarkTheme ? 'border-slate-800 bg-slate-950' : 'border-slate-200 bg-slate-50'">
+                    <div class="flex items-center justify-between p-2 rounded-xl border transition-colors" :class="isDarkTheme ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'">
+                        <div class="flex items-center space-x-2 space-x-reverse">
+                            <div class="w-8 h-8 rounded-full bg-brand-500/20 border border-brand-500/40 text-brand-400 flex items-center justify-center font-bold text-xs"
+                                 x-text="currentUser.name ? currentUser.name[0] : 'U'"></div>
+                            <div class="text-xs">
+                                <p class="font-bold truncate w-28" :class="isDarkTheme ? 'text-slate-200' : 'text-slate-800'" x-text="currentUser.name"></p>
+                                <p class="text-[10px] text-brand-500" x-text="currentUser.role"></p>
+                            </div>
+                        </div>
+                        <button @click="logout()" class="p-1.5 text-slate-400 hover:text-rose-500 transition-colors" title="تسجيل الخروج">
+                            <i class="fa-solid fa-right-from-bracket text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Workspace -->
+            <main class="flex-1 flex flex-col min-w-0 overflow-hidden transition-colors duration-300" :class="isDarkTheme ? 'bg-slate-900 text-slate-100' : 'bg-slate-100 text-slate-900'">
+                <!-- Header -->
+                <header class="h-16 backdrop-blur border-b flex items-center justify-between px-6 z-10 no-print transition-colors"
+                        :class="isDarkTheme ? 'bg-slate-950/80 border-slate-800 text-white' : 'bg-white/80 border-slate-200 text-slate-800'">
+                    <h2 class="text-base font-bold flex items-center gap-2">
+                        <i class="text-brand-500" :class="getTabIcon(currentTab)"></i>
+                        <span x-text="getTabTitle(currentTab)"></span>
+                    </h2>
+
+                    <div class="flex items-center space-x-4 space-x-reverse">
+                        <button @click="isDarkTheme = !isDarkTheme" class="p-2 text-slate-400 hover:text-brand-400 transition-colors">
+                            <i class="fa-solid" :class="isDarkTheme ? 'fa-sun' : 'fa-moon'"></i>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Content Area -->
+                <div class="flex-1 overflow-y-auto p-6 space-y-6">
+                    
+                    <!-- Dashboard Tab -->
+                    <template x-if="currentTab === 'dashboard'">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                            <div class="border rounded-2xl p-5 shadow transition-colors relative overflow-hidden" :class="isDarkTheme ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-200'">
+                                <div class="absolute top-0 right-0 left-0 h-1 bg-brand-500"></div>
+                                <p class="text-xs font-medium text-slate-400">إجمالي الموظفين</p>
+                                <h3 class="text-3xl font-black mt-2" x-text="employees.length"></h3>
+                            </div>
+                            <div class="border rounded-2xl p-5 shadow transition-colors relative overflow-hidden" :class="isDarkTheme ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-200'">
+                                <div class="absolute top-0 right-0 left-0 h-1 bg-emerald-500"></div>
+                                <p class="text-xs font-medium text-slate-400">سجلات البصمة</p>
+                                <h3 class="text-3xl font-black text-emerald-500 mt-2" x-text="attendanceLogs.length"></h3>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- Employees Tab -->
+                    <template x-if="currentTab === 'employees'">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-4 rounded-2xl border transition-colors" :class="isDarkTheme ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-200'">
+                                <h3 class="font-bold text-sm">قائمة الموظفين</h3>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                                <template x-for="emp in employees" :key="emp.id">
+                                    <div class="border rounded-2xl p-5 transition-colors" :class="isDarkTheme ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-200'">
+                                        <h4 class="font-bold text-sm" x-text="emp.name"></h4>
+                                        <p class="text-xs text-brand-500" x-text="emp.position"></p>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- Attendance Tab -->
+                    <template x-if="currentTab === 'attendance'">
+                        <div class="border rounded-2xl p-5 space-y-4 transition-colors" :class="isDarkTheme ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-200'">
+                            <h3 class="font-bold text-sm">سجل البصمة</h3>
+                            <p class="text-xs text-slate-400">سجلات الحضور والانصراف المباشرة من قاعدة البيانات.</p>
+                        </div>
+                    </template>
+
+                    <!-- Documents Tab -->
+                    <template x-if="currentTab === 'documents'">
+                        <div class="border rounded-2xl p-5 space-y-4 transition-colors" :class="isDarkTheme ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-200'">
+                            <h3 class="font-bold text-sm">إدارة المستندات الرسمية</h3>
+                            <p class="text-xs text-slate-400">تتبع تواريخ الانتهاء ورخص المؤسسة.</p>
+                        </div>
+                    </template>
+
+                </div>
+            </main>
+        </div>
+    </template>
+
+    <!-- Supabase Script Initialization -->
+    <script>
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        
+        let supabaseClient = null;
+        if (typeof supabase !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+
+        function hrApp() {
+            return {
+                isDarkTheme: true,
+                currentUser: null,
+                loading: false,
+                loginError: '',
+                currentTab: 'dashboard',
+                companySettings: { name: 'HR Pro Enterprise' },
+                loginForm: { username: '', password: '' },
+                employees: [],
+                attendanceLogs: [],
+                documents: [],
+                expiringDocsCount: 0,
+                
+                accessibleNavItems: [
+                    { id: 'dashboard', label: 'لوحة التحكم', icon: 'fa-solid fa-chart-pie' },
+                    { id: 'employees', label: 'دليل الموظفين', icon: 'fa-solid fa-users' },
+                    { id: 'attendance', label: 'سجل البصمة', icon: 'fa-solid fa-fingerprint' },
+                    { id: 'documents', label: 'المستندات والرخص', icon: 'fa-solid fa-folder-open' }
+                ],
+
+                async initApp() {
+                    if (supabaseClient) {
+                        await this.fetchData();
+                    }
+                },
+
+                async handleLogin() {
+                    this.loading = true;
+                    this.loginError = '';
+
+                    try {
+                        if (supabaseClient) {
+                            const { data, error } = await supabaseClient
+                                .from('profiles')
+                                .select('*')
+                                .eq('username', this.loginForm.username)
+                                .eq('password', this.loginForm.password)
+                                .single();
+
+                            if (error || !data) {
+                                this.loginError = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+                            } else {
+                                this.currentUser = data;
+                                await this.fetchData();
+                            }
+                        } else {
+                            if (this.loginForm.username === 'admin' && this.loginForm.password === 'admin123') {
+                                this.currentUser = { name: 'المدير العام', role: 'Admin' };
+                            } else {
+                                this.loginError = 'اسم المستخدم التجريبي: admin / كلمة المرور: admin123';
+                            }
+                        }
+                    } catch (err) {
+                        this.loginError = 'حدث خطأ في الاتصال بقاعدة البيانات';
+                    } finally {
+                        this.loading = false;
+                    }
+                },
+
+                async fetchData() {
+                    if (!supabaseClient) return;
+                    
+                    const { data: emp } = await supabaseClient.from('employees').select('*');
+                    if (emp) this.employees = emp;
+
+                    const { data: logs } = await supabaseClient.from('attendance_logs').select('*');
+                    if (logs) this.attendanceLogs = logs;
+                },
+
+                logout() {
+                    this.currentUser = null;
+                    this.loginForm = { username: '', password: '' };
+                },
+
+                getTabIcon(tab) {
+                    const found = this.accessibleNavItems.find(i => i.id === tab);
+                    return found ? found.icon : 'fa-solid fa-square';
+                },
+
+                getTabTitle(tab) {
+                    const found = this.accessibleNavItems.find(i => i.id === tab);
+                    return found ? found.label : '';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
