@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="appTitle">Infinite Horizon Ultimate ERP - Comprehensive Enterprise Edition</title>
+    <title id="appTitle">Infinite Horizon Ultimate ERP - Enterprise Edition</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -12,7 +12,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 800: '#075985', 900: '#0c4a6e' }
+                        brand: { 50: '#fef2f2', 500: '#ef4444', 600: '#dc2626', 700: '#b91c1c', 800: '#991b1b', 900: '#7f1d1d' }
                     }
                 }
             }
@@ -29,13 +29,13 @@
         ::-webkit-scrollbar-thumb:hover { background: #334155; }
     </style>
 </head>
-<body id="appBody" class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-sky-500 selection:text-white">
+<body id="appBody" class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-red-500 selection:text-white">
 
     <!-- LOGIN SCREEN GATEWAY -->
     <div id="loginScreen" class="fixed inset-0 bg-slate-950 z-50 flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-md p-8 shadow-2xl space-y-6">
             <div class="text-center space-y-2">
-                <div class="w-16 h-16 rounded-2xl bg-sky-500/20 border border-sky-500/30 flex items-center justify-center text-sky-400 font-extrabold text-2xl mx-auto shadow-lg shadow-sky-500/20">
+                <div class="w-16 h-16 rounded-2xl bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-500 font-extrabold text-2xl mx-auto shadow-lg shadow-red-500/20">
                     <i class="fa-solid fa-layer-group"></i>
                 </div>
                 <h2 class="text-xl font-black text-white" id="loginBrandName">Infinite Horizon ERP</h2>
@@ -44,13 +44,13 @@
             <form onsubmit="event.preventDefault(); performLogin();" class="space-y-4 text-xs">
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">اسم المستخدم</label>
-                    <input type="text" id="loginUsername" value="admin" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-500">
+                    <input type="text" id="loginUsername" value="admin" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500">
                 </div>
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">كلمة المرور</label>
-                    <input type="password" id="loginPassword" value="admin123" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-500">
+                    <input type="password" id="loginPassword" value="admin123" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500">
                 </div>
-                <button type="submit" class="w-full py-3 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl transition shadow-lg shadow-sky-600/30 text-xs">تسجيل الدخول للنظام</button>
+                <button type="submit" class="w-full py-3 bg-red-600 hover:bg-red-500 text-white font-bold rounded-xl transition shadow-lg shadow-red-600/30 text-xs">تسجيل الدخول للنظام</button>
             </form>
         </div>
     </div>
@@ -63,18 +63,18 @@
             <div>
                 <!-- Logo Brand Header -->
                 <div class="h-20 flex items-center px-6 border-b border-slate-800 gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-slate-500 flex items-center justify-center shadow-lg shadow-sky-600/30">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-red-600 to-emerald-600 flex items-center justify-center shadow-lg shadow-red-600/30">
                         <i class="fa-solid fa-layer-group text-white text-lg"></i>
                     </div>
                     <div>
-                        <h1 class="font-extrabold text-xs tracking-tight text-white" id="sidebarBrandName">Infinite Horizon</h1>
-                        <span class="text-[10px] text-sky-400 font-bold uppercase tracking-wider" id="sidebarBrandSub">Ultimate ERP</span>
+                        <h1 class="font-extrabold text-xs tracking-tight text-white" id="sidebarBrandName">عالم لانا</h1>
+                        <span class="text-[10px] text-red-400 font-bold uppercase tracking-wider" id="sidebarBrandSub">Ultimate ERP</span>
                     </div>
                 </div>
 
                 <!-- Menu Links -->
                 <nav class="p-4 space-y-1 overflow-y-auto max-h-[calc(100vh-140px)]">
-                    <a href="#" onclick="switchTab('dashboard', this)" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold bg-sky-600 text-white shadow-lg shadow-sky-600/20 transition">
+                    <a href="#" onclick="switchTab('dashboard', this)" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold bg-red-600 text-white shadow-lg shadow-red-600/20 transition">
                         <i class="fa-solid fa-chart-pie w-5 text-center"></i> لوحة القيادة الشاملة
                     </a>
                     <a href="#" onclick="switchTab('emp-cards', this)" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition">
@@ -86,10 +86,10 @@
                     <a href="#" onclick="switchTab('zk-import', this)" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-emerald-400 hover:bg-slate-800 hover:text-white transition">
                         <i class="fa-solid fa-fingerprint w-5 text-center"></i> استيراد بصمات ZKTeco
                     </a>
-                    <a href="#" onclick="switchTab('absence-entry', this)" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-rose-400 hover:bg-slate-800 hover:text-white transition">
+                    <a href="#" onclick="switchTab('absence-entry', this)" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-red-400 hover:bg-slate-800 hover:text-white transition">
                         <i class="fa-solid fa-user-slash w-5 text-center"></i> تسجيل الغياب والأعذار
                     </a>
-                    <a href="#" onclick="switchTab('overtime', this)" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-amber-400 hover:bg-slate-800 hover:text-white transition">
+                    <a href="#" onclick="switchTab('overtime', this)" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-emerald-400 hover:bg-slate-800 hover:text-white transition">
                         <i class="fa-solid fa-clock-rotate-left w-5 text-center"></i> الساعات الإضافية والأرصدة
                     </a>
                     <a href="#" onclick="switchTab('shifts', this)" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition">
@@ -98,10 +98,10 @@
                     <a href="#" onclick="switchTab('grace-period', this)" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition">
                         <i class="fa-solid fa-stopwatch w-5 text-center"></i> فترة السماح ولائحة التأخير
                     </a>
-                    <a href="#" onclick="switchTab('users-permissions', this)" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-sky-400 hover:bg-slate-800 hover:text-white transition">
+                    <a href="#" onclick="switchTab('users-permissions', this)" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-emerald-400 hover:bg-slate-800 hover:text-white transition">
                         <i class="fa-solid fa-user-shield w-5 text-center"></i> الصلاحيات والمستخدمون
                     </a>
-                    <a href="#" onclick="switchTab('branding-settings', this)" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-amber-400 hover:bg-slate-800 hover:text-white transition">
+                    <a href="#" onclick="switchTab('branding-settings', this)" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-red-400 hover:bg-slate-800 hover:text-white transition">
                         <i class="fa-solid fa-sliders w-5 text-center"></i> إعدادات الهوية وكلمة المرور
                     </a>
                 </nav>
@@ -110,7 +110,7 @@
             <!-- Sidebar Profile Footer -->
             <div class="p-4 border-t border-slate-800 bg-slate-900/50 flex justify-between items-center">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-xl bg-sky-600/20 border border-sky-500/30 flex items-center justify-center text-sky-300 font-bold text-xs">
+                    <div class="w-9 h-9 rounded-xl bg-red-600/20 border border-red-500/30 flex items-center justify-center text-red-400 font-bold text-xs">
                         مد
                     </div>
                     <div class="overflow-hidden">
@@ -120,7 +120,7 @@
                         </div>
                     </div>
                 </div>
-                <button onclick="logout()" class="text-slate-500 hover:text-rose-400 transition" title="تسجيل الخروج"><i class="fa-solid fa-right-from-bracket"></i></button>
+                <button onclick="logout()" class="text-slate-500 hover:text-red-400 transition" title="تسجيل الخروج"><i class="fa-solid fa-right-from-bracket"></i></button>
             </div>
         </aside>
 
@@ -138,7 +138,7 @@
                 </div>
 
                 <div class="flex items-center gap-3">
-                    <button onclick="openModal('addEmpModal')" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl text-xs transition shadow-lg shadow-sky-600/20 flex items-center gap-2">
+                    <button onclick="openModal('addEmpModal')" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white font-bold rounded-xl text-xs transition shadow-lg shadow-red-600/20 flex items-center gap-2">
                         <i class="fa-solid fa-user-plus"></i> إضافة موظف
                     </button>
                 </div>
@@ -156,7 +156,7 @@
                                     <p class="text-[11px] font-bold text-slate-400">إجمالي الموظفين</p>
                                     <h3 class="text-2xl font-black text-white mt-2" id="statEmpCount">0 موظف</h3>
                                 </div>
-                                <div class="p-3 bg-sky-500/10 text-sky-400 rounded-xl border border-sky-500/20">
+                                <div class="p-3 bg-red-500/10 text-red-500 rounded-xl border border-red-500/20">
                                     <i class="fa-solid fa-users text-lg"></i>
                                 </div>
                             </div>
@@ -176,9 +176,9 @@
                             <div class="flex justify-between items-start">
                                 <div>
                                     <p class="text-[11px] font-bold text-slate-400">حالات الغياب المسجلة</p>
-                                    <h3 class="text-2xl font-black text-rose-400 mt-2" id="statAbsenceCount">0 حالة</h3>
+                                    <h3 class="text-2xl font-black text-red-500 mt-2" id="statAbsenceCount">0 حالة</h3>
                                 </div>
-                                <div class="p-3 bg-rose-500/10 text-rose-400 rounded-xl border border-rose-500/20">
+                                <div class="p-3 bg-red-500/10 text-red-500 rounded-xl border border-red-500/20">
                                     <i class="fa-solid fa-user-slash text-lg"></i>
                                 </div>
                             </div>
@@ -187,9 +187,9 @@
                             <div class="flex justify-between items-start">
                                 <div>
                                     <p class="text-[11px] font-bold text-slate-400">عدد المستخدمين النشطين</p>
-                                    <h3 class="text-2xl font-black text-amber-400 mt-2" id="statUsersCount">1 مستخدم</h3>
+                                    <h3 class="text-2xl font-black text-emerald-400 mt-2" id="statUsersCount">1 مستخدم</h3>
                                 </div>
-                                <div class="p-3 bg-amber-500/10 text-amber-400 rounded-xl border border-amber-500/20">
+                                <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-xl border border-emerald-500/20">
                                     <i class="fa-solid fa-user-shield text-lg"></i>
                                 </div>
                             </div>
@@ -200,7 +200,7 @@
                 <!-- TAB 2: EMPLOYEE CARDS -->
                 <div id="tab-emp-cards" class="tab-content hidden space-y-6">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-address-card text-sky-400 ml-2"></i> بطاقات التعريف السريعة للموظفين</h3>
+                        <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-address-card text-red-500 ml-2"></i> بطاقات التعريف السريعة للموظفين</h3>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="cardsGrid"></div>
                 </div>
@@ -209,7 +209,7 @@
                 <div id="tab-hr-management" class="tab-content hidden space-y-6">
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-users-gear text-sky-400"></i> إدارة الموارد البشرية وشؤون الموظفين
+                            <i class="fa-solid fa-users-gear text-red-500"></i> إدارة الموارد البشرية وشؤون الموظفين
                         </h3>
                         <div class="overflow-x-auto">
                             <table class="w-full text-right text-xs">
@@ -250,8 +250,8 @@
 
                             <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4 text-xs">
                                 <h4 class="font-bold text-white text-xs">أو لصق نص البصمات الخشِنة مباشرة</h4>
-                                <textarea id="zkRawText" rows="3" placeholder="1001   2026-10-30 08:00:15   0   1..." class="w-full bg-slate-900 border border-slate-800 rounded-xl p-3 text-slate-300 font-mono text-[11px] focus:outline-none focus:border-sky-500"></textarea>
-                                <button onclick="processZkRawText()" class="w-full py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl transition shadow-lg shadow-sky-600/30">تحليل واستيراد النص المنسوخ</button>
+                                <textarea id="zkRawText" rows="3" placeholder="1001   2026-10-30 08:00:15   0   1..." class="w-full bg-slate-900 border border-slate-800 rounded-xl p-3 text-slate-300 font-mono text-[11px] focus:outline-none focus:border-red-500"></textarea>
+                                <button onclick="processZkRawText()" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-xl transition shadow-lg shadow-red-600/30">تحليل واستيراد النص المنسوخ</button>
                             </div>
                         </div>
 
@@ -278,9 +278,9 @@
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
                         <div class="flex justify-between items-center">
                             <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                                <i class="fa-solid fa-user-slash text-rose-400"></i> تسجيل وإدارة الغياب اليدوي
+                                <i class="fa-solid fa-user-slash text-red-500"></i> تسجيل وإدارة الغياب اليدوي
                             </h3>
-                            <button onclick="openModal('addAbsenceModal')" class="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-bold transition">
+                            <button onclick="openModal('addAbsenceModal')" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-xs font-bold transition">
                                 <i class="fa-solid fa-plus ml-1"></i> تسجيل غياب جديد
                             </button>
                         </div>
@@ -306,9 +306,9 @@
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
                         <div class="flex justify-between items-center">
                             <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                                <i class="fa-solid fa-clock-rotate-left text-amber-400"></i> الساعات الإضافية وبنك الأرصدة
+                                <i class="fa-solid fa-clock-rotate-left text-emerald-400"></i> الساعات الإضافية وبنك الأرصدة
                             </h3>
-                            <button onclick="openModal('addOvertimeModal')" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-bold transition">
+                            <button onclick="openModal('addOvertimeModal')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition">
                                 <i class="fa-solid fa-plus ml-1"></i> تسجيل ساعات إضافية
                             </button>
                         </div>
@@ -332,11 +332,11 @@
                 <!-- TAB 7: SHIFTS -->
                 <div id="tab-shifts" class="tab-content hidden space-y-6">
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
-                        <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-calendar-days text-sky-400 ml-2"></i> أوقات العمل والشيفتات المعتمدة</h3>
+                        <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-calendar-days text-red-500 ml-2"></i> أوقات العمل والشيفتات المعتمدة</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
                                 <h4 class="font-bold text-xs text-white">الشيفت الصباحي الأساسي</h4>
-                                <p class="text-[11px] text-slate-400 mt-2">من: <span class="text-emerald-400 font-bold">08:00 صباحاً</span> إلى: <span class="text-sky-400 font-bold">04:00 مساءً</span></p>
+                                <p class="text-[11px] text-slate-400 mt-2">من: <span class="text-emerald-400 font-bold">08:00 صباحاً</span> إلى: <span class="text-red-500 font-bold">04:00 مساءً</span></p>
                             </div>
                         </div>
                     </div>
@@ -345,7 +345,7 @@
                 <!-- TAB 8: GRACE PERIOD -->
                 <div id="tab-grace-period" class="tab-content hidden space-y-6">
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
-                        <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-stopwatch text-amber-400 ml-2"></i> فترة السماح ولائحة التأخير</h3>
+                        <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-stopwatch text-emerald-400 ml-2"></i> فترة السماح ولائحة التأخير</h3>
                         <p class="text-xs text-slate-400">15 دقيقة فترة سماح رسمية قبل احتساب الخصم تلقائياً.</p>
                     </div>
                 </div>
@@ -355,9 +355,9 @@
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
                         <div class="flex justify-between items-center">
                             <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                                <i class="fa-solid fa-user-shield text-sky-400"></i> إدارة حسابات المستخدمين والصلاحيات
+                                <i class="fa-solid fa-user-shield text-emerald-400"></i> إدارة حسابات المستخدمين والصلاحيات
                             </h3>
-                            <button onclick="openModal('addUserModal')" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-bold transition">
+                            <button onclick="openModal('addUserModal')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition">
                                 <i class="fa-solid fa-plus ml-1"></i> إضافة مستخدم جديد
                             </button>
                         </div>
@@ -382,23 +382,23 @@
                 <div id="tab-branding-settings" class="tab-content hidden space-y-6">
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-sliders text-amber-400"></i> إعدادات الهوية وتغيير كلمة مرور المدير الرئيسي
+                            <i class="fa-solid fa-sliders text-red-500"></i> إعدادات الهوية وتغيير كلمة مرور المدير الرئيسي
                         </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
                             <div class="space-y-4">
                                 <div>
                                     <label class="block font-bold text-slate-400 mb-1">اسم الشركة / المنشأة</label>
-                                    <input type="text" id="brandNameInput" value="Infinite Horizon" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-sky-500">
+                                    <input type="text" id="brandNameInput" value="عالم لانا للترفية" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-red-500">
                                 </div>
                                 <div>
                                     <label class="block font-bold text-slate-400 mb-1">عنوان النظام الفرعي</label>
-                                    <input type="text" id="brandSubInput" value="Ultimate ERP" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-sky-500">
+                                    <input type="text" id="brandSubInput" value="Ultimate ERP" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-red-500">
                                 </div>
                                 <div>
                                     <label class="block font-bold text-slate-400 mb-1">كلمة مرور المدير الجديدة (admin)</label>
-                                    <input type="password" id="newAdminPassInput" placeholder="اتركه فارغاً إن لم ترغب بالتغيير" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-sky-500">
+                                    <input type="password" id="newAdminPassInput" placeholder="اتركه فارغاً إن لم ترغب بالتغيير" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-red-500">
                                 </div>
-                                <button onclick="saveBrandingSettings()" class="px-6 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl transition shadow-lg shadow-sky-600/30">حفظ وتثبيت التغييرات</button>
+                                <button onclick="saveBrandingSettings()" class="px-6 py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-xl transition shadow-lg shadow-red-600/30">حفظ وتثبيت التغييرات</button>
                             </div>
                         </div>
                     </div>
@@ -408,7 +408,7 @@
 
             <!-- Footer -->
             <footer class="h-16 bg-slate-900 border-t border-slate-800 px-8 flex justify-between items-center text-[11px] text-slate-500">
-                <p>جميع الحقوق محفوظة © 2026 - <span class="font-bold text-sky-400" id="footerBrand">Infinite Horizon Ultimate ERP</span></p>
+                <p>جميع الحقوق محفوظة © 2026 - <span class="font-bold text-red-500" id="footerBrand">عالم لانا للترفية - Ultimate ERP</span></p>
             </footer>
         </div>
     </div>
@@ -417,28 +417,28 @@
     <div id="addEmpModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md p-6 shadow-2xl space-y-4">
             <div class="flex justify-between items-center pb-3 border-b border-slate-800">
-                <h3 class="text-xs font-bold text-white"><i class="fa-solid fa-user-plus text-sky-400 ml-2"></i> إضافة موظف جديد</h3>
+                <h3 class="text-xs font-bold text-white"><i class="fa-solid fa-user-plus text-red-500 ml-2"></i> إضافة موظف جديد</h3>
                 <button onclick="closeModal('addEmpModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-sm"></i></button>
             </div>
             <form onsubmit="event.preventDefault(); saveEmployee();" class="space-y-3 text-xs">
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">رقم الموظف (ID)</label>
-                    <input type="text" id="newEmpId" placeholder="1001" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-sky-500">
+                    <input type="text" id="newEmpId" placeholder="1001" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-red-500">
                 </div>
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">اسم الموظف الثلاثي</label>
-                    <input type="text" id="newEmpName" placeholder="أحمد الرشيد" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-sky-500">
+                    <input type="text" id="newEmpName" placeholder="أحمد الرشيد" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-red-500">
                 </div>
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">القسم</label>
-                    <input type="text" id="newEmpDept" placeholder="تقنية المعلومات" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-sky-500">
+                    <input type="text" id="newEmpDept" placeholder="الإدارة / الكوفي / النظافة" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-red-500">
                 </div>
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">المسمى الوظيفي</label>
-                    <input type="text" id="newEmpRole" placeholder="مدير تطوير" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-sky-500">
+                    <input type="text" id="newEmpRole" placeholder="مشرف / موظف" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-red-500">
                 </div>
                 <div class="pt-2">
-                    <button type="submit" class="w-full py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl transition shadow-lg shadow-sky-600/30">حفظ الموظف</button>
+                    <button type="submit" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-xl transition shadow-lg shadow-red-600/30">حفظ الموظف</button>
                 </div>
             </form>
         </div>
@@ -448,28 +448,28 @@
     <div id="addUserModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md p-6 shadow-2xl space-y-4">
             <div class="flex justify-between items-center pb-3 border-b border-slate-800">
-                <h3 class="text-xs font-bold text-white"><i class="fa-solid fa-user-shield text-sky-400 ml-2"></i> إضافة مستخدم نظام</h3>
+                <h3 class="text-xs font-bold text-white"><i class="fa-solid fa-user-shield text-emerald-400 ml-2"></i> إضافة مستخدم نظام</h3>
                 <button onclick="closeModal('addUserModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-sm"></i></button>
             </div>
             <form onsubmit="event.preventDefault(); saveUser();" class="space-y-3 text-xs">
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">الاسم الكامل</label>
-                    <input type="text" id="newUserName" placeholder="خالد العمري" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-sky-500">
+                    <input type="text" id="newUserName" placeholder="خالد العمري" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-red-500">
                 </div>
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">اسم الدخول (Username)</label>
-                    <input type="text" id="newUserLogin" placeholder="khaled" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-sky-500">
+                    <input type="text" id="newUserLogin" placeholder="khaled" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-red-500">
                 </div>
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">الصلاحية</label>
-                    <select id="newUserRole" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-sky-500">
+                    <select id="newUserRole" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-red-500">
                         <option value="مسؤول موارد بشرية">مسؤول موارد بشرية</option>
                         <option value="مشرف حضور وبصمة">مشرف حضور وبصمة</option>
                         <option value="مدير كامل الصلاحيات">مدير كامل الصلاحيات</option>
                     </select>
                 </div>
                 <div class="pt-2">
-                    <button type="submit" class="w-full py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl transition shadow-lg shadow-sky-600/30">حفظ المستخدم</button>
+                    <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition shadow-lg shadow-emerald-600/30">حفظ المستخدم</button>
                 </div>
             </form>
         </div>
@@ -479,24 +479,24 @@
     <div id="addOvertimeModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md p-6 shadow-2xl space-y-4">
             <div class="flex justify-between items-center pb-3 border-b border-slate-800">
-                <h3 class="text-xs font-bold text-white"><i class="fa-solid fa-clock-rotate-left text-amber-400 ml-2"></i> تسجيل ساعات إضافية</h3>
+                <h3 class="text-xs font-bold text-white"><i class="fa-solid fa-clock-rotate-left text-emerald-400 ml-2"></i> تسجيل ساعات إضافية</h3>
                 <button onclick="closeModal('addOvertimeModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-sm"></i></button>
             </div>
             <form onsubmit="event.preventDefault(); saveOvertime();" class="space-y-3 text-xs">
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">الموظف</label>
-                    <select id="otEmpSelect" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-sky-500"></select>
+                    <select id="otEmpSelect" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-red-500"></select>
                 </div>
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">عدد الساعات الإضافية</label>
-                    <input type="number" id="otHours" placeholder="3" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-sky-500">
+                    <input type="number" id="otHours" placeholder="3" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-red-500">
                 </div>
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">سبب العمل الإضافي</label>
-                    <input type="text" id="otReason" placeholder="تطوير / مهام طارئة" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-sky-500">
+                    <input type="text" id="otReason" placeholder="تطوير / مهام طارئة" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-red-500">
                 </div>
                 <div class="pt-2">
-                    <button type="submit" class="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl transition shadow-lg shadow-amber-600/30">حفظ وإضافة إلى رصيد الموظف</button>
+                    <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition shadow-lg shadow-emerald-600/30">حفظ وإضافة إلى رصيد الموظف</button>
                 </div>
             </form>
         </div>
@@ -507,10 +507,10 @@
         <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-3xl p-6 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center pb-4 border-b border-slate-800">
                 <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-xl bg-sky-600/20 border border-sky-500/30 flex items-center justify-center text-sky-300 font-black text-lg" id="profileInitials">أر</div>
+                    <div class="w-12 h-12 rounded-xl bg-red-600/20 border border-red-500/30 flex items-center justify-center text-red-400 font-black text-lg" id="profileInitials">أر</div>
                     <div>
                         <h3 class="text-base font-bold text-white" id="profileName">أحمد الرشيد</h3>
-                        <p class="text-xs text-sky-400" id="profileRole">مدير تطوير التقنية #1001</p>
+                        <p class="text-xs text-red-400" id="profileRole">مدير تطوير التقنية #1001</p>
                     </div>
                 </div>
                 <button onclick="closeModal('employeeProfileModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -519,15 +519,15 @@
             <div class="space-y-6">
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
                     <div class="flex justify-between items-center">
-                        <h4 class="text-xs font-bold text-amber-400 flex items-center gap-2"><i class="fa-solid fa-folder-closed"></i> قاعدة المرفقات والمستندات (PDF)</h4>
-                        <label class="px-3 py-1 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-[10px] font-bold cursor-pointer transition">
+                        <h4 class="text-xs font-bold text-emerald-400 flex items-center gap-2"><i class="fa-solid fa-folder-closed"></i> قاعدة المرفقات والمستندات (PDF)</h4>
+                        <label class="px-3 py-1 bg-red-600 hover:bg-red-500 text-white rounded-lg text-[10px] font-bold cursor-pointer transition">
                             <i class="fa-solid fa-upload ml-1"></i> رفع مستند PDF
                             <input type="file" accept=".pdf" class="hidden" onchange="uploadPdf(this)">
                         </label>
                     </div>
                     <div class="space-y-2 text-xs" id="pdfList">
                         <div class="flex justify-between items-center bg-slate-900 p-2.5 rounded-lg border border-slate-800">
-                            <span class="text-slate-300 font-medium"><i class="fa-solid fa-file-pdf text-rose-400 ml-2"></i> عقد_العمل_الموثق.pdf</span>
+                            <span class="text-slate-300 font-medium"><i class="fa-solid fa-file-pdf text-red-500 ml-2"></i> عقد_العمل_الموثق.pdf</span>
                             <span class="text-slate-500 text-[10px]">مرفق معتمد</span>
                         </div>
                     </div>
@@ -540,27 +540,27 @@
     <div id="addAbsenceModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md p-6 shadow-2xl space-y-4">
             <div class="flex justify-between items-center pb-3 border-b border-slate-800">
-                <h3 class="text-xs font-bold text-white"><i class="fa-solid fa-user-slash text-rose-400 ml-2"></i> تسجيل غياب يدوي للموظف</h3>
+                <h3 class="text-xs font-bold text-white"><i class="fa-solid fa-user-slash text-red-500 ml-2"></i> تسجيل غياب يدوي للموظف</h3>
                 <button onclick="closeModal('addAbsenceModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-sm"></i></button>
             </div>
             <form onsubmit="event.preventDefault(); saveAbsence();" class="space-y-3 text-xs">
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">اختيار الموظف</label>
-                    <select id="absEmpSelect" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-sky-500"></select>
+                    <select id="absEmpSelect" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-red-500"></select>
                 </div>
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">نوع الغياب</label>
-                    <select id="absType" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-sky-500">
+                    <select id="absType" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-red-500">
                         <option value="غياب بعذر">غياب بعذر (مرضي/طارئ)</option>
                         <option value="غياب بدون عذر">غياب بدون عذر</option>
                     </select>
                 </div>
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">السبب / الملاحظات</label>
-                    <input type="text" id="absReason" placeholder="تقرير طبي / ظرف طارئ" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-sky-500">
+                    <input type="text" id="absReason" placeholder="تقرير طبي / ظرف طارئ" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-red-500">
                 </div>
                 <div class="pt-2">
-                    <button type="submit" class="w-full py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl transition shadow-lg shadow-rose-600/30">تسجيل الغياب وتحديث الملف</button>
+                    <button type="submit" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-xl transition shadow-lg shadow-red-600/30">تسجيل الغياب وتحديث الملف</button>
                 </div>
             </form>
         </div>
@@ -576,8 +576,8 @@
         let adminPassword = localStorage.getItem('erp_admin_pass') || 'admin123';
 
         let employees = JSON.parse(localStorage.getItem('erp_employees')) || [
-            { id: '1001', name: 'أحمد الرشيد', dept: 'تقنية المعلومات', role: 'مدير تطوير', vacationBalance: 21 },
-            { id: '1002', name: 'سارة القحطاني', dept: 'الإدارة المالية', role: 'محاسب أول', vacationBalance: 15 }
+            { id: '1001', name: 'أحمد الرشيد', dept: 'الإدارة', role: 'مدير العمليات', vacationBalance: 21 },
+            { id: '1002', name: 'سارة القحطاني', dept: 'الكوفي', role: 'مشرف كوفي', vacationBalance: 15 }
         ];
 
         let zkLogs = JSON.parse(localStorage.getItem('erp_zk_logs')) || [
@@ -589,7 +589,7 @@
         ];
 
         let overtimes = JSON.parse(localStorage.getItem('erp_overtimes')) || [
-            { name: 'أحمد الرشيد', hours: 4, reason: 'تطوير ميزة طارئة', balance: 18 }
+            { name: 'أحمد الرشيد', hours: 4, reason: 'تطوير مهام طارئة', balance: 18 }
         ];
 
         let users = JSON.parse(localStorage.getItem('erp_users')) || [
@@ -631,7 +631,7 @@
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.className = "nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition";
             });
-            if(el) el.className = "nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold bg-sky-600 text-white shadow-lg shadow-sky-600/20 transition";
+            if(el) el.className = "nav-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold bg-red-600 text-white shadow-lg shadow-red-600/20 transition";
         }
 
         function openModal(modalId) { 
@@ -657,12 +657,12 @@
             document.getElementById('cardsGrid').innerHTML = employees.map(e => `
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl relative overflow-hidden">
                     <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-2xl bg-sky-600/20 border border-sky-500/30 flex items-center justify-center text-sky-300 font-extrabold text-lg">
+                        <div class="w-14 h-14 rounded-2xl bg-red-600/20 border border-red-500/30 flex items-center justify-center text-red-400 font-extrabold text-lg">
                             ${e.name.substring(0, 2)}
                         </div>
                         <div>
                             <h4 class="font-bold text-white text-sm">${e.name}</h4>
-                            <p class="text-xs text-sky-400 font-semibold">${e.role}</p>
+                            <p class="text-xs text-red-400 font-semibold">${e.role}</p>
                             <p class="text-[10px] text-slate-400 mt-1">الرقم الوظيفي: #${e.id}</p>
                         </div>
                     </div>
@@ -677,7 +677,7 @@
                         </div>
                     </div>
                     <div class="mt-4 flex gap-2">
-                        <button onclick="openProfileModal('${e.name}', '${e.role}', '#${e.id}')" class="w-full py-2 bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold rounded-lg transition"><i class="fa-solid fa-folder-open ml-1"></i> فتح الملف المنفصل</button>
+                        <button onclick="openProfileModal('${e.name}', '${e.role}', '#${e.id}')" class="w-full py-2 bg-red-600 hover:bg-red-500 text-white text-xs font-bold rounded-lg transition"><i class="fa-solid fa-folder-open ml-1"></i> فتح الملف المنفصل</button>
                     </div>
                 </div>
             `).join('');
@@ -685,13 +685,13 @@
             // HR Table
             document.getElementById('hrTableBody').innerHTML = employees.map(e => `
                 <tr>
-                    <td class="px-4 py-3 font-mono text-sky-400">#${e.id}</td>
+                    <td class="px-4 py-3 font-mono text-red-400">#${e.id}</td>
                     <td class="px-4 py-3 font-bold text-white">${e.name}</td>
                     <td class="px-4 py-3">${e.dept}</td>
                     <td class="px-4 py-3">${e.role}</td>
                     <td class="px-4 py-3">${e.vacationBalance} يوم</td>
                     <td class="px-4 py-3 text-center">
-                        <button onclick="openProfileModal('${e.name}', '${e.role}', '#${e.id}')" class="px-3 py-1 bg-sky-600/20 text-sky-300 border border-sky-500/30 rounded-lg text-[11px] font-bold hover:bg-sky-600 hover:text-white transition">عرض الملف</button>
+                        <button onclick="openProfileModal('${e.name}', '${e.role}', '#${e.id}')" class="px-3 py-1 bg-red-600/20 text-red-300 border border-red-500/30 rounded-lg text-[11px] font-bold hover:bg-red-600 hover:text-white transition">عرض الملف</button>
                     </td>
                 </tr>
             `).join('');
@@ -710,7 +710,7 @@
                 <tr>
                     <td class="px-4 py-3 font-bold text-white">${a.name}</td>
                     <td class="px-4 py-3">${a.date}</td>
-                    <td class="px-4 py-3"><span class="px-2 py-0.5 ${a.type.includes('بعذر') ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'} rounded text-[10px] font-bold">${a.type}</span></td>
+                    <td class="px-4 py-3"><span class="px-2 py-0.5 ${a.type.includes('بعذر') ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400'} rounded text-[10px] font-bold">${a.type}</span></td>
                     <td class="px-4 py-3">${a.reason}</td>
                 </tr>
             `).join('');
@@ -729,7 +729,7 @@
             document.getElementById('usersTableBody').innerHTML = users.map(u => `
                 <tr>
                     <td class="px-4 py-3 font-bold text-white">${u.name}</td>
-                    <td class="px-4 py-3 font-mono text-sky-400">${u.login}</td>
+                    <td class="px-4 py-3 font-mono text-emerald-400">${u.login}</td>
                     <td class="px-4 py-3">${u.role}</td>
                     <td class="px-4 py-3"><span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded text-[10px] font-bold">${u.status}</span></td>
                 </tr>
@@ -834,7 +834,7 @@
                 const name = input.files[0].name;
                 document.getElementById('pdfList').innerHTML += `
                     <div class="flex justify-between items-center bg-slate-900 p-2.5 rounded-lg border border-slate-800">
-                        <span class="text-slate-300 font-medium"><i class="fa-solid fa-file-pdf text-rose-400 ml-2"></i> ${name}</span>
+                        <span class="text-slate-300 font-medium"><i class="fa-solid fa-file-pdf text-red-500 ml-2"></i> ${name}</span>
                         <span class="text-emerald-400 text-[10px]">تم الرفع</span>
                     </div>
                 `;
