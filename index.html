@@ -209,10 +209,11 @@
                                 <table class="w-full text-right text-xs">
                                     <thead class="bg-slate-950 text-slate-400 uppercase border-b border-slate-800">
                                         <tr>
-                                            <th class="px-3 py-2">المستند</th>
+                                            <th class="px-3 py-2">المستند / الرخصة</th>
                                             <th class="px-3 py-2">الجهة المصدرة</th>
                                             <th class="px-3 py-2">تاريخ الانتهاء</th>
                                             <th class="px-3 py-2">الحالة</th>
+                                            <th class="px-3 py-2 text-center">الإجراء</th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-slate-800 text-slate-300" id="shopDocsTableBody"></tbody>
@@ -234,6 +235,7 @@
                                             <th class="px-3 py-2">نوع الصيانة</th>
                                             <th class="px-3 py-2">موعد التذكير</th>
                                             <th class="px-3 py-2">الحالة</th>
+                                            <th class="px-3 py-2 text-center">الإجراء</th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-slate-800 text-slate-300" id="maintTableBody"></tbody>
@@ -399,7 +401,7 @@
     <div id="addShopDocModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md p-6 shadow-2xl space-y-4">
             <div class="flex justify-between items-center pb-3 border-b border-slate-800">
-                <h3 class="text-xs font-bold text-white"><i class="fa-solid fa-file-shield text-enterprise-400 ml-2"></i> إضافة ورقة أو رخصة للمحل</h3>
+                <h3 class="text-xs font-bold text-white"><i class="fa-solid fa-file-shield text-enterprise-400 ml-2"></i> إضافة ورقة أو رخصة البلدية</h3>
                 <button onclick="closeModal('addShopDocModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-sm"></i></button>
             </div>
             <form onsubmit="event.preventDefault(); saveShopDoc();" class="space-y-3 text-xs">
@@ -409,7 +411,7 @@
                 </div>
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">الجهة المصدرة</label>
-                    <input type="text" id="docIssuer" placeholder="أمانة العاصمة / وزارة التجارة" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none">
+                    <input type="text" id="docIssuer" placeholder="أمانة العاصمة / البلدية" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none">
                 </div>
                 <div>
                     <label class="block font-bold text-slate-400 mb-1">تاريخ انتهاء الصلاحية</label>
@@ -489,7 +491,7 @@
 
     <!-- CORE SYSTEM JAVASCRIPT -->
     <script>
-        let db = JSON.parse(localStorage.getItem('lana_erp_db_v3')) || {
+        let db = JSON.parse(localStorage.getItem('lana_erp_db_v7')) || {
             employees: [
                 { id: '1001', name: 'سلطان القحطاني', dept: 'الإدارة', title: 'مدير العمليات', salary: 7500, vacation: 21 },
                 { id: '1002', name: 'فهد الشمري', dept: 'الإشراف', title: 'مشرف صالة ترفيه', salary: 5200, vacation: 18 }
@@ -499,17 +501,17 @@
                 { name: 'كومار سينغ', iqama: '2498765432', passport: 'CD987654', iqamaExp: '2026-02-10', workExp: '2026-03-01', medExp: '2026-02-28' }
             ],
             shopDocs: [
-                { name: 'رخصة البلدية التجارية', issuer: 'أمانة المدينة', exp: '2026-08-12' },
-                { name: 'عقد إيجار الصالة الترفيهية', issuer: 'المالك العقاري', exp: '2026-11-30' },
-                { name: 'شهادة الدفاع المدني', issuer: 'مديرية الدفاع المدني', exp: '2026-07-05' }
+                { id: 'doc_1', name: 'رخصة البلدية التجارية', issuer: 'أمانة المدينة', exp: '2026-08-12' },
+                { id: 'doc_2', name: 'عقد إيجار الصالة الترفيهية', issuer: 'المالك العقاري', exp: '2026-11-30' },
+                { id: 'doc_3', name: 'شهادة الدفاع المدني', issuer: 'مديرية الدفاع المدني', exp: '2026-07-05' }
             ],
             maintenance: [
-                { device: 'ماكينة قهوة اسبريسو الرئيسية', type: 'فحص وفلترة دورية', date: '2026-03-15' },
-                { device: 'ألعاب الواقع الافتراضي VR', type: 'تحديث وسوفتوير', date: '2026-03-10' }
+                { id: 'maint_1', device: 'ماكينة قهوة اسبريسو الرئيسية', type: 'فحص وفلترة دورية', date: '2026-03-15' },
+                { id: 'maint_2', device: 'ألعاب الواقع الافتراضي VR', type: 'تحديث وسوفتوير', date: '2026-03-10' }
             ],
             zkLogs: [],
             auditLogs: [
-                { user: 'مدير النظام العام', action: 'تم تفعيل قسم الإقامات والصيانة بنجاح', timestamp: '2026-10-30 08:00:00' }
+                { user: 'مدير النظام العام', action: 'تم تصحيح وتعديل تسمية رخصة البلدية بنجاح', timestamp: '2026-10-30 08:00:00' }
             ],
             users: [
                 { 
@@ -530,7 +532,7 @@
         let currentUser = null;
 
         function saveDB() {
-            localStorage.setItem('lana_erp_db_v3', JSON.stringify(db));
+            localStorage.setItem('lana_erp_db_v7', JSON.stringify(db));
         }
 
         function logAudit(actionText) {
@@ -683,21 +685,37 @@
                     <td class="px-3 py-2 text-slate-400">${d.issuer}</td>
                     <td class="px-3 py-2 font-mono text-enterprise-400">${d.exp}</td>
                     <td class="px-3 py-2"><span class="px-2 py-0.5 bg-enterprise-500/10 text-enterprise-400 rounded text-[10px]">ساري</span></td>
+                    <td class="px-3 py-2 text-center">
+                        <button onclick="deleteShopDoc('${d.id}')" class="px-2 py-1 bg-lana-600/20 hover:bg-lana-600 text-lana-400 hover:text-white rounded text-[11px] transition"><i class="fa-solid fa-trash"></i></button>
+                    </td>
                 </tr>
             `).join('');
         }
 
         function saveShopDoc() {
-            db.shopDocs.push({
+            const newDoc = {
+                id: 'doc_' + Date.now(),
                 name: document.getElementById('docName').value,
                 issuer: document.getElementById('docIssuer').value,
                 exp: document.getElementById('docExp').value
-            });
-            logAudit(`إضافة رخصة/مستند للمحل: ${document.getElementById('docName').value}`);
+            };
+            db.shopDocs.push(newDoc);
+            logAudit(`إضافة رخصة/مستند للمحل: ${newDoc.name}`);
             saveDB();
             initApp();
             closeModal('addShopDocModal');
-            alert('تم إضافة ورقة ورخصة المحل بنجاح!');
+            document.getElementById('docName').value = '';
+            document.getElementById('docIssuer').value = '';
+            document.getElementById('docExp').value = '';
+            alert('تم إضافة ورقة ورخصة البلدية بنجاح!');
+        }
+
+        function deleteShopDoc(id) {
+            if(confirm('هل أنت متأكد من حذف هذا المستند/الرخصة؟')) {
+                db.shopDocs = db.shopDocs.filter(x => x.id !== id);
+                saveDB();
+                initApp();
+            }
         }
 
         function renderMaintenance() {
@@ -707,21 +725,37 @@
                     <td class="px-3 py-2 text-slate-400">${m.type}</td>
                     <td class="px-3 py-2 font-mono text-lana-400">${m.date}</td>
                     <td class="px-3 py-2"><span class="px-2 py-0.5 bg-lana-500/10 text-lana-400 rounded text-[10px]">مجدول</span></td>
+                    <td class="px-3 py-2 text-center">
+                        <button onclick="deleteMaintenance('${m.id}')" class="px-2 py-1 bg-lana-600/20 hover:bg-lana-600 text-lana-400 hover:text-white rounded text-[11px] transition"><i class="fa-solid fa-trash"></i></button>
+                    </td>
                 </tr>
             `).join('');
         }
 
         function saveMaint() {
-            db.maintenance.push({
+            const newMaint = {
+                id: 'maint_' + Date.now(),
                 device: document.getElementById('maintDevice').value,
                 type: document.getElementById('maintType').value,
                 date: document.getElementById('maintDate').value
-            });
-            logAudit(`إضافة تذكير صيانة: ${document.getElementById('maintDevice').value}`);
+            };
+            db.maintenance.push(newMaint);
+            logAudit(`إضافة تذكير صيانة: ${newMaint.device}`);
             saveDB();
             initApp();
             closeModal('addMaintModal');
+            document.getElementById('maintDevice').value = '';
+            document.getElementById('maintType').value = '';
+            document.getElementById('maintDate').value = '';
             alert('تم إضافة تذكير الصيانة بنجاح!');
+        }
+
+        function deleteMaintenance(id) {
+            if(confirm('هل أنت متأكد من حذف تذكير الصيانة هذا؟')) {
+                db.maintenance = db.maintenance.filter(x => x.id !== id);
+                saveDB();
+                initApp();
+            }
         }
 
         function renderHrTable() {
