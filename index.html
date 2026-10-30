@@ -491,7 +491,7 @@
 
     <!-- CORE SYSTEM JAVASCRIPT -->
     <script>
-        let db = JSON.parse(localStorage.getItem('lana_erp_db_v7')) || {
+        let db = JSON.parse(localStorage.getItem('lana_erp_db_v8')) || {
             employees: [
                 { id: '1001', name: 'سلطان القحطاني', dept: 'الإدارة', title: 'مدير العمليات', salary: 7500, vacation: 21 },
                 { id: '1002', name: 'فهد الشمري', dept: 'الإشراف', title: 'مشرف صالة ترفيه', salary: 5200, vacation: 18 }
@@ -511,7 +511,7 @@
             ],
             zkLogs: [],
             auditLogs: [
-                { user: 'مدير النظام العام', action: 'تم تصحيح وتعديل تسمية رخصة البلدية بنجاح', timestamp: '2026-10-30 08:00:00' }
+                { user: 'مدير النظام العام', action: 'تم مراجعة وتصحيح كافة الاختلافات البرمجية بنجاح', timestamp: '2026-10-30 08:00:00' }
             ],
             users: [
                 { 
@@ -532,7 +532,7 @@
         let currentUser = null;
 
         function saveDB() {
-            localStorage.setItem('lana_erp_db_v7', JSON.stringify(db));
+            localStorage.setItem('lana_erp_db_v8', JSON.stringify(db));
         }
 
         function logAudit(actionText) {
@@ -633,8 +633,6 @@
             document.getElementById('statShopDocsCount').innerText = `${db.shopDocs.length} مستند`;
             document.getElementById('statMaintCount').innerText = `${db.maintenance.length} مهام`;
             document.getElementById('statAlertsCount').innerText = `${db.foreignWorkers.length * 3} تنبيه`;
-            const totalSalaries = db.employees.reduce((acc, curr) => acc + (curr.salary || 0), 0);
-            document.getElementById('statPayrollSum').innerText = `${totalSalaries.toLocaleString()} ر.س`;
         }
 
         function renderForeignWorkers() {
@@ -707,7 +705,7 @@
             document.getElementById('docName').value = '';
             document.getElementById('docIssuer').value = '';
             document.getElementById('docExp').value = '';
-            alert('تم إضافة ورقة ورخصة البلدية بنجاح!');
+            alert('تم إضافة ورقة أو رخصة البلدية بنجاح!');
         }
 
         function deleteShopDoc(id) {
