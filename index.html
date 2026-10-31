@@ -61,6 +61,12 @@
             color: #0f172a !important;
         }
         body.light-theme th { background-color: #f1f5f9 !important; color: #475569 !important; }
+
+        /* Print Formatting Fix */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+        }
     </style>
 </head>
 <body id="appBody" class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-lana-500 selection:text-white" style="color: #f1f5f9;">
